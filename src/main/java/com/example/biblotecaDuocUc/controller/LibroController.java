@@ -9,9 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.biblotecaDuocUc.model.Libro;
 import com.example.biblotecaDuocUc.service.LibroService;
+
+@RestController
+@RequestMapping("/api/v1/libros")
 
 public class LibroController {
      @Autowired
@@ -42,6 +47,16 @@ public class LibroController {
     @DeleteMapping("{id}")
     public String eliminarLibro(@PathVariable int id){
         return libroService.deleteLibro(id);
+    }
+
+    @GetMapping("/total")
+    public int totalLibrosV2(){
+        return libroService.totalLibrosV2();
+    }
+
+    @GetMapping("/isbn/{isbn}")
+    public String buscarPorIsbn(@PathVariable String isbn){
+        return libroService.buscarPorIsbn(isbn);
     }
 
 }
